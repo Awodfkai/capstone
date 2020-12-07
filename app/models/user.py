@@ -12,9 +12,9 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
   created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-  videos = db.relationship("Video", back_populates="user")
-  comments = db.relationship("Comment", back_populates="user")
-  likes = db.relationship("Like", back_populates="user")
+  videos = db.relationship("Video", cascade="all, delete", back_populates="user")
+  comments = db.relationship("Comment", cascade="all, delete", back_populates="user")
+  likes = db.relationship("Like", cascade="all, delete", back_populates="user")
 
   @property
   def password(self):

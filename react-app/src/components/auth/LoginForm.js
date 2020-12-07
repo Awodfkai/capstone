@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import { login } from "../../services/auth";
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(UserContext)
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
-    if (!user.errors) {
+    const res = await login(email, password);
+    if (!res.errors) {
       setAuthenticated(true);
+      setUser(res)
     } else {
-      setErrors(user.errors);
+      setErrors(res.errors);
     }
   };
 

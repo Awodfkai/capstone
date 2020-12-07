@@ -6,11 +6,14 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import Upload from "./components/Upload"
+import UserContext from "./context/UserContext"
 import { authenticate } from "./services/auth";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [user ,setUser] = useState()
 
   useEffect(() => {
     (async() => {
@@ -28,25 +31,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
-      <Route path="/login" exact={true}>
-        <LoginForm
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
-        />
-      </Route>
-      <Route path="/sign-up" exact={true}>
-        <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-      </Route>
-      <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-        <UsersList/>
-      </ProtectedRoute>
-      <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
-        <User />
-      </ProtectedRoute>
-      <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-        <h1>My Home Page</h1>
-      </ProtectedRoute>
+      <UserContext.Provider value={{user, setUser}} >
+        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} />
+        <Route path="/login" exact={true}>
+          <LoginForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+        </Route>
+        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
+          <UsersList/>
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+          <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <h1>My Home Page</h1>
+        </ProtectedRoute>
+        <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
+          <Upload />
+        </ProtectedRoute>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }

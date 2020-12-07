@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import UserContext from "../../context/UserContext";
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const { user, setUser } = useContext(UserContext)
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
-      if (!user.errors) {
+      const res = await signUp(username, email, password);
+      if (!res.errors) {
         setAuthenticated(true);
+        setUser(res)
       }
     }
   };

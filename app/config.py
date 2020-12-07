@@ -10,4 +10,3 @@ class Config:
   S3_SECRET=os.environ.get("S3_SECRET_ACCESS_KEY")
   S3_LOCATION='http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
   DEBUG=True
-  PORT=5000
