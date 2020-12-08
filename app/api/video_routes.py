@@ -3,15 +3,22 @@ from flask_login import login_required
 from werkzeug.utils import secure_filename
 from ..forms import VideoForm
 from ..models import Video
+from ..config import Config
 
 video_routes = Blueprint('video', __name__)
 
 from ..helpers import *
 
-@video_routes.route('/upload')
+ALLOWED_EXTENSIONS = {'mp4'}
+
+def allowed_file(filename):
+  return '.' in filename and \
+    filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@video_routes.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
-  form = VideoForm()
+  print('inside api/videos/upload')
   if "user_file" not in request.files:
     return "No user_file key in request.files"
   file = request.files["user_file"]
@@ -26,14 +33,24 @@ def upload():
   if file.filename == "":
     return "Please Select a file"
   
-  if file and allowed_file(file.filename) and form.validate():
+  if file and allowed_file(file.filename):
     file.filename = secure_filename(file.filename)
-    output = upload_file_to_s3(file, app.config["S3_BUCKET"])
-    newVideo = Video(
-      title=form.data['title'],
-      description = form.data['description'],
-      
-    )
-    return str(output)
+    url = upload_file_to_s3(file)
+    print(getUploads())
+    return str(url)
   else:
     return redirect("/upload")
+
+@video_routes.route('/')
+def addVideo():
+  form = VideoForm()
+  if form.validate():
+    newVideo = Video(
+        title=form.data['title'],
+        description=form.data['description'],
+        url=form.data['url']
+    )
+    db.session.add(newHabit)
+    print(newHabit)
+    db.session.commit()
+    return jsonify(newHabit)
