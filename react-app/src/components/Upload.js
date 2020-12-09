@@ -9,11 +9,12 @@ const Upload = () => {
   const { user } = useContext(UserContext)
 
   const onSubmit = async (e) => {
-    // const newVideo = await uploadVideo(
-    //   title,
-    //   description,
-    //   url,
-    // )
+    const newVideo = await uploadVideo(
+      title,
+      description,
+      user_id = user.id,
+      url,
+    )
 
 
     // if (!newHabit.errors) {
@@ -27,7 +28,7 @@ const Upload = () => {
   return (
     <>
       <h1>Upload</h1>
-      <form action="/api/video" method="POST" encType="multipart/form-data">
+      <form action="/api/video/upload" method="POST" encType="multipart/form-data">
         <label>
           Upload Your Video
           <br/>
