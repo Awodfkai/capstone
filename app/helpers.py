@@ -26,7 +26,7 @@ def upload_file_to_s3(file, bucket_name=S3_BUCKET, acl="private"):
   except Exception as e:
     print("Something Happened While Uploading to AWS: ", e)
     return e
-  return "{}{}".format(Config["S3_LOCATION"], file.filename)
+  return "{}{}".format(Config.S3_LOCATION, file.filename)
 
 def getUploads():
   return s3.list_objects(Bucket=S3_BUCKET)

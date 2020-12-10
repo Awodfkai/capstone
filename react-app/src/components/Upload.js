@@ -6,33 +6,65 @@ const Upload = () => {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [url ,setUrl] = useState()
+  const [file, setFile] = useState()
   const { user } = useContext(UserContext)
 
+  const uploadVData = async (title, description, user_id, url) => {
+    const response = await fetch(`/api/video/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        user_id,
+        url
+      }),
+    });
+    return await response.json();
+  }
+
+  const uploadVideo = async (file) => {
+    const formData = new FormData();
+    formData.append("user_file", file);
+
+    const response = await fetch('/api/video/upload', {
+      method: 'POST',
+      body: formData
+    });
+  }
+
   const onSubmit = async (e) => {
+    e.preventDefault()
     const newVideo = await uploadVideo(
-      title,
-      description,
-      user_id = user.id,
-      url,
+     file
     )
 
+    console.log("newVideo returns: ", newVideo)
+    console.log("how do I parse the url from that return")
 
-    // if (!newHabit.errors) {
-      
-    //   setDescription()
+
+    // if (newVideo.ok) {
+    //   const newVideo = await uploadVData(
+    //     title,
+    //     description,
+    //     user_id = user.id,
+    //     url,
+    //   )
     // } else {
-    //   setErrors(newHabit.errors)
+    //   setErrors(newVideo.errors)
     // }
   }
 
   return (
     <>
       <h1>Upload</h1>
-      <form action="/api/video/upload" method="POST" encType="multipart/form-data">
+      <form onSubmit={onSubmit}>
         <label>
           Upload Your Video
           <br/>
-          <input type="file" name="user_file" />
+          <input type="file" name="user_file" onChange={setFile} />
         </label>
         <label>
           Title

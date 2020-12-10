@@ -36,21 +36,21 @@ def upload():
   if file and allowed_file(file.filename):
     file.filename = secure_filename(file.filename)
     url = upload_file_to_s3(file)
-    print(getUploads())
     return str(url)
   else:
     return redirect("/upload")
 
-@video_routes.route('/')
+@video_routes.route('/create')
 def addVideo():
   form = VideoForm()
   if form.validate():
     newVideo = Video(
         title=form.data['title'],
         description=form.data['description'],
+        user_id = form.data['user_id'],
         url=form.data['url']
     )
-    db.session.add(newHabit)
-    print(newHabit)
+    db.session.add(newVideo)
+    print(newVideo)
     db.session.commit()
-    return jsonify(newHabit)
+    return jsonify(newVideo)
