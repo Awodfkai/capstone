@@ -15,6 +15,9 @@ const Upload = () => {
   const updateDescription = (e) => {
     setDescription(e.target.value)
   }
+  const updateFile = (e) => {
+    setFile(e.target.files[0])
+  }
   
 
   const uploadVData = async (title, description, user_id, url) => {
@@ -38,7 +41,7 @@ const Upload = () => {
       method: 'POST',
       body: formData
     });
-    return response
+    return await response.json()
   }
 
   const asyncSubmit = async (formData) => {
@@ -46,26 +49,26 @@ const Upload = () => {
       formData
     )
     console.log("newVideo returns: ", newVideo)
-    const url = newVideo.url
-
+    const url = newVideo
     console.log("url is what now?: ", url)
-    // if (newVideo.ok) {
-    //   const newData = await uploadVData(
-    //     title,
-    //     description,
-    //     user_id,
-    //     url,
-    //   )
-    //   console.log('data upload return: ', newData)
-    // } else {
-    //   console.log('data upload failed')
-    // }
+    if (url) {
+      const newData = await uploadVData(
+        title,
+        description,
+        user_id,
+        url,
+      )
+      console.log('data upload return: ', newData)
+    } else {
+      console.log('returned url is not valid')
+    }
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData();
     formData.append("user_file", file);
+    console.log(file)
     asyncSubmit(formData)
   }
 
@@ -76,7 +79,7 @@ const Upload = () => {
         <label>
           Upload Your Video
           <br/>
-          <input type="file" name="user_file" onChange={setFile} />
+          <input type="file" name="user_file" onChange={updateFile} />
         </label>
         <label>
           Title

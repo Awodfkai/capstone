@@ -11,7 +11,7 @@ s3 = boto3.client(
   aws_secret_access_key=S3_SECRET
 )
 
-def upload_file_to_s3(file, bucket_name=S3_BUCKET, acl="private"):
+def upload_file_to_s3(file, bucket_name=S3_BUCKET, acl="public-read"):
   print("bucket_name: ", bucket_name)
   try:
     s3.upload_fileobj(
