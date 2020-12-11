@@ -3,11 +3,19 @@ import UserContext from '../context/UserContext';
 import User from './User';
 
 const Upload = () => {
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
-  const [url ,setUrl] = useState()
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
   const [file, setFile] = useState()
   const { user } = useContext(UserContext)
+  const user_id = user.id
+
+  const updateTitle = (e) => {
+    setTitle(e.target.value)
+  }
+  const updateDescription = (e) => {
+    setDescription(e.target.value)
+  }
+  
 
   const uploadVData = async (title, description, user_id, url) => {
     const response = await fetch(`/api/video/create`, {
@@ -25,36 +33,40 @@ const Upload = () => {
     return await response.json();
   }
 
-  const uploadVideo = async (file) => {
-    const formData = new FormData();
-    formData.append("user_file", file);
-
+  const uploadVideo = async (formData) => {
     const response = await fetch('/api/video/upload', {
       method: 'POST',
       body: formData
     });
+    return response
   }
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const asyncSubmit = async (formData) => {
     const newVideo = await uploadVideo(
-     file
+      formData
     )
-
     console.log("newVideo returns: ", newVideo)
-    console.log("how do I parse the url from that return")
+    const url = newVideo.url
 
-
+    console.log("url is what now?: ", url)
     // if (newVideo.ok) {
-    //   const newVideo = await uploadVData(
+    //   const newData = await uploadVData(
     //     title,
     //     description,
-    //     user_id = user.id,
+    //     user_id,
     //     url,
     //   )
+    //   console.log('data upload return: ', newData)
     // } else {
-    //   setErrors(newVideo.errors)
+    //   console.log('data upload failed')
     // }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("user_file", file);
+    asyncSubmit(formData)
   }
 
   return (
@@ -68,11 +80,11 @@ const Upload = () => {
         </label>
         <label>
           Title
-          <input type="text" name="title" onChange={setTitle} />
+          <input type="text" name="title" onChange={updateTitle} />
         </label>
         <label>
           Description
-          <input type="text" name="description" onChange={setDescription} />
+          <input type="text" name="description" onChange={updateDescription} />
         </label>
         <button type="submit">Upload</button>
       </form>

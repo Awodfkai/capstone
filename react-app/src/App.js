@@ -18,7 +18,8 @@ function App() {
   useEffect(() => {
     (async() => {
       const user = await authenticate();
-      if (!user.errors) {
+      if (!user.errors && user) {
+        setUser(user)
         setAuthenticated(true);
       }
       setLoaded(true);
@@ -28,6 +29,7 @@ function App() {
   if (!loaded) {
     return null;
   }
+  
 
   return (
     <BrowserRouter>
