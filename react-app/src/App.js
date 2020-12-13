@@ -6,7 +6,8 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import Upload from "./components/Upload"
+import Upload from "./components/Upload";
+import Home from "./components/Home";
 import UserContext from "./context/UserContext"
 import { authenticate } from "./services/auth";
 
@@ -51,7 +52,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+          <Home />
         </ProtectedRoute>
         <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
           <Upload />

@@ -64,3 +64,9 @@ def addVideo():
     return jsonify('success')
   else:
     return jsonify('not nice')
+
+@video_routes.route('/', methods=['GET'])
+def getVideos():
+  videos = Video.query.order_by(Video.views).all()
+  videos_list = [videoSchema(video) for video in videos]
+  return jsonify(videos_list)

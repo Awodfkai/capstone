@@ -30,3 +30,14 @@ def upload_file_to_s3(file, bucket_name=S3_BUCKET, acl="public-read"):
 
 def getUploads():
   return s3.list_objects(Bucket=S3_BUCKET)
+
+def videoSchema(video):
+  return {
+    'id': video.id,
+    'title': video.title,
+    'description': video.description,
+    'views': video.views,
+    'user_id': video.user_id,
+    'url': video.url,
+    'created_at': video.created_at,
+  }
