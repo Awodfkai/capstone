@@ -90,7 +90,7 @@ const Upload = () => {
       <div className='upload-response'>
         {renderResponse(feedback)}
       </div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='upload-form'>
         <label>
           Upload Your Video
           <br/>
