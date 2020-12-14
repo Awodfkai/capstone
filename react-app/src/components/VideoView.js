@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
+import CommentFeed from '../components/CommentFeed';
 
 function VideoView() {
   const [vidFilePath, setVidFilePath] = useState('')
@@ -32,15 +33,18 @@ function VideoView() {
   }, [])
 
   return (
-    <div className='VideoView'>
-      <div>
-       <h2>{title} by {username}</h2>
+    <div>
+      <div className='VideoView'>
+        <div>
+        <h2>{title} by {username}</h2>
+        </div>
+        <ReactPlayer url={vidFilePath} controls={true} />
+        <div className='VideoView-info'>
+          <div>Views: {views}</div>
+          <p>{description}</p>
+        </div>
       </div>
-      <ReactPlayer url={vidFilePath} controls={true} />
-      <div className='VideoView-info'>
-        <div>Views: {views}</div>
-        <p>{description}</p>
-      </div>
+      <CommentFeed />
     </div>
   );
 }

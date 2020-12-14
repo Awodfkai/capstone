@@ -2,7 +2,7 @@ from flask import Flask, request, Blueprint, jsonify
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from ..forms import VideoForm
-from ..models import db, Video, User
+from ..models import db, Video, User, Comment
 from ..config import Config
 
 video_routes = Blueprint('video', __name__)
@@ -85,3 +85,9 @@ def watchVideo(vid):
   video.views = video.views + 1
   db.session.commit()
   return 'views updated'
+
+@video_routes.route('/<int:vid>/comments', methods=['GET'])
+def getComments(vid):
+  comments = Comment.query.filter(Comment.video_id == vid).order_by(Comment.created_at)
+  comment_list = [commentSchema(comment) for comment in comments]
+  return jsonify(comment_list)

@@ -1,5 +1,6 @@
 import boto3, botocore
 from .config import Config
+from .models import User
 
 S3_KEY = Config.S3_KEY
 S3_SECRET = Config.S3_SECRET
@@ -47,4 +48,15 @@ def userSchema(user):
     'id': user.id,
     'username': user.username,
     'email': user.email,
+  }
+
+def commentSchema(comment):
+  user = User.query.get(comment.user_id)
+  return {
+    'id': comment.id,
+    'video_id': comment.video_id,
+    'user_id': comment.user_id,
+    'username': user.username,
+    'text': comment.text,
+    'created_at': comment.created_at,
   }

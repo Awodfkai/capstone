@@ -25,6 +25,20 @@ nav ul{
   min-width: 100%;
 }
 
+.authForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.authForm input {
+  min-width: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+.authForm button {
+  margin: 10px;
+}
+
 .VideoFeed-member{
   border: 1px solid black;
   margin: 10px;
@@ -38,9 +52,21 @@ nav ul{
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  background-color: forestgreen;
 }
 .VideoView-info{
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
+}
+
+.CommentFeed{
+  display: flex;
+  flex-direction: column;
+}
+.CommentFeed-member{
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  background-color: skyblue;
 }
