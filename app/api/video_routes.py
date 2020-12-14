@@ -1,7 +1,7 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_login import login_required
 from werkzeug.utils import secure_filename
-from ..forms import VideoForm
+from ..forms import VideoForm, CommentForm
 from ..models import db, Video, User, Comment
 from ..config import Config
 
@@ -91,3 +91,17 @@ def getComments(vid):
   comments = Comment.query.filter(Comment.video_id == vid).order_by(Comment.created_at)
   comment_list = [commentSchema(comment) for comment in comments]
   return jsonify(comment_list)
+
+@video_routes.route('/<int:vid>/comment', methods=['POST'])
+def postComment(vid):
+  form = CommentForm()
+  if form.data:
+    newComment = Comment(
+      video_id=vid,
+      user_id=form.data['user_id'],
+      text=form.data['text'],
+    )
+    db.session.add(newComment)
+    db.session.commit()
+    return jsonify('success')
+  return jsonify('failure')

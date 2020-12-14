@@ -14,6 +14,8 @@ nav{
 nav ul li{
   display: inline;
   margin: 5px;
+  padding: 5px;
+  border-left: 1px solid black
 }
 nav ul{
   color: blue;
@@ -69,4 +71,11 @@ nav ul{
   margin: 10px;
   padding: 10px;
   background-color: skyblue;
+}
+
+.CommentSubmit{
+  min-width: 100%;
+}
+.CommentSubmit input{
+  min-width: 100%;
 }

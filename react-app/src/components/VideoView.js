@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import CommentFeed from '../components/CommentFeed';
+import CommentSubmitter from "./CommentSubmitter";
 
 function VideoView() {
   const [vidFilePath, setVidFilePath] = useState('')
@@ -45,6 +46,7 @@ function VideoView() {
         </div>
       </div>
       <CommentFeed />
+      <CommentSubmitter />
     </div>
   );
 }
