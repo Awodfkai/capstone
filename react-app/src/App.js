@@ -8,6 +8,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Upload from "./components/Upload";
 import Home from "./components/Home";
+import VideoView from "./components/VideoView";
 import UserContext from "./context/UserContext"
 import { authenticate } from "./services/auth";
 
@@ -57,6 +58,9 @@ function App() {
         <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
           <Upload />
         </ProtectedRoute>
+        <Route path="/videos/:vid">
+          <VideoView />
+        </Route>
       </UserContext.Provider>
     </BrowserRouter>
   );

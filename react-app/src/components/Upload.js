@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../context/UserContext';
-import User from './User';
 
 const Upload = () => {
   const [title, setTitle] = useState("")

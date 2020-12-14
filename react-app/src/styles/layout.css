@@ -1,8 +1,46 @@
+body{
+  background-color: cornflowerblue;
+  min-width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
 nav{
-  border: 2px solid black;
   padding: 0px;
   margin: 0px;
+  background-color: cadetblue;
+  min-width: 100%;
+  position: relative;
 }
 nav ul li{
   display: inline;
+  margin: 5px;
+}
+nav ul{
+  color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0px;
+  padding: 0px;
+  min-width: 100%;
+}
+
+.VideoFeed-member{
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  background-color: skyblue;
+}
+
+.VideoView{
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.VideoView-info{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
 }
