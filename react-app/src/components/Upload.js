@@ -5,6 +5,7 @@ const Upload = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [file, setFile] = useState()
+  const [feedback, setFeedback] = useState('')
   const { user } = useContext(UserContext)
   const user_id = user.id
 
@@ -16,6 +17,16 @@ const Upload = () => {
   }
   const updateFile = (e) => {
     setFile(e.target.files[0])
+  }
+
+  const renderResponse = (res) => {
+    if(res){
+      return (
+        <div>
+          {res}
+        </div>
+      )
+    }
   }
   
 
@@ -57,23 +68,28 @@ const Upload = () => {
         user_id,
         url,
       )
-      console.log('data upload return: ', newData)
+      setFeedback('Upload Success')
     } else {
-      console.log('returned url is not valid')
+      setFeedback('An error occurred while uploading')
     }
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
+    if(!file){
+      setFeedback('no file selected')
+    }
     const formData = new FormData();
     formData.append("user_file", file);
-    console.log(file)
     asyncSubmit(formData)
   }
 
   return (
     <>
       <h1>Upload</h1>
+      <div className='upload-response'>
+        {renderResponse(feedback)}
+      </div>
       <form onSubmit={onSubmit}>
         <label>
           Upload Your Video

@@ -79,3 +79,8 @@ nav ul{
 .CommentSubmit input{
   min-width: 100%;
 }
+
+.upload-response{
+  margin: 10px;
+  padding: 10px;
+}
