@@ -5,6 +5,10 @@ body{
   padding: 0px;
   font-family: Arial, Helvetica, sans-serif;
 }
+h2{
+  margin: 10px
+}
+
 nav{
   padding: 0px;
   margin: 0px;
@@ -72,6 +76,10 @@ nav ul{
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
+}
+.VideoView-header{
+  color: aliceblue;
+  border: 1px solid black;
 }
 
 .CommentFeed{

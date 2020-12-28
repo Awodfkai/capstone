@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import CommentFeed from '../components/CommentFeed';
 import CommentSubmitter from "./CommentSubmitter";
+import '../styles/layout.css'
 
 function VideoView() {
   const [vidFilePath, setVidFilePath] = useState('')
@@ -36,8 +37,8 @@ function VideoView() {
   return (
     <div>
       <div className='VideoView'>
-        <div>
-        <h2>{title} by {username}</h2>
+        <div className='VideoView-header'>
+          <h2 className='VideoView-header'>{title} by {username}</h2>
         </div>
         <ReactPlayer url={vidFilePath} controls={true} />
         <div className='VideoView-info'>
