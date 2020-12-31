@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import CommentFeed from '../components/CommentFeed';
 import CommentSubmitter from "./CommentSubmitter";
 import '../styles/layout.css'
+import FollowButton from "./FollowButton";
 
 function VideoView() {
   const [vidFilePath, setVidFilePath] = useState('')
@@ -11,6 +12,7 @@ function VideoView() {
   const [description, setDescription] = useState('')
   const [views, setViews] = useState()
   const [username, setUsername] = useState('')
+  const [vidOwnerId, setVidOwnerId] = useState()
   const { vid } = useParams()
 
   useEffect(() => {
@@ -29,16 +31,26 @@ function VideoView() {
         setDescription(video.description)
         setViews(video.views)
         setUsername(user.username)
+        setVidOwnerId(user.id)
       }
     }
     fetchVideo()
   }, [])
+
+  const renderFollowButton = (vidOwnerId) => {
+    if(vidOwnerId){
+      return (
+        <FollowButton target_id={vidOwnerId} />
+      )
+    }
+  }
 
   return (
     <div>
       <div className='VideoView'>
         <div className='VideoView-header'>
           <h2 className='VideoView-header'>{title} by {username}</h2>
+          {renderFollowButton(vidOwnerId)}
         </div>
         <ReactPlayer url={vidFilePath} controls={true} />
         <div className='VideoView-info'>

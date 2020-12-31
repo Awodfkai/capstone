@@ -26,12 +26,14 @@ const CommentFeed = () => {
       return list.map(item => {
         return (
             <div className='CommentFeed-member' key={item.id} >
-              <h4>
-                {item.username}
-              </h4>
-              <p>
-                Created at: {item.created_at}
-              </p>
+              <div className='Comment-info'>
+                <h4>
+                  {item.username}
+                </h4>
+                <p>
+                  {item.created_at}
+                </p>
+              </div>
               <p>
                 {item.text}
               </p>

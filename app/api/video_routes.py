@@ -2,7 +2,7 @@ from flask import Flask, request, Blueprint, jsonify
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from ..forms import VideoForm, CommentForm
-from ..models import db, Video, User, Comment
+from ..models import db, Video, User, Comment, Follow
 from ..config import Config
 
 video_routes = Blueprint('video', __name__)
@@ -67,7 +67,15 @@ def addVideo():
 
 @video_routes.route('/', methods=['GET'])
 def getVideos():
-  videos = Video.query.order_by(Video.views).all()
+  videos = Video.query.order_by(Video.views.desc()).all()
+  videos_list = [videoSchema(video) for video in videos]
+  return jsonify(videos_list)
+
+@video_routes.route('/<int:uid>/following', methods=['GET'])
+def getFollowedVideos(uid):
+  follows = Follow.query.filter_by(follower_id=uid).all()
+  followed = [follow.followed_id for follow in follows]
+  videos = Video.query.filter(Video.user_id.in_(followed)).order_by(Video.created_at).all()
   videos_list = [videoSchema(video) for video in videos]
   return jsonify(videos_list)
 

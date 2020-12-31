@@ -7,24 +7,24 @@ export default function FollowButton(target) {
   let target_id = target.target_id
 
   useEffect(() => {
-    console.log(target)
     async function fetchFollow(target_id) {
       const res = await fetch(`/api/follow/${user.id}/${target_id}/get`)
       if (res.ok) {
         const followStatus = await res.json()
-        console.log('followStatus: ', followStatus)
-        setText(followStatus)
+        console.log('followStatus: ', followStatus.text)
+        console.log('follow: ', followStatus.follow)
+        setText(followStatus.text)
       }
     }
-    if(target_id){
+    if(target.target_id){
       fetchFollow(target_id)
     }
     
-  }, [target_id])
+  }, [target, target_id, user])
 
   const onUpdate = async (e) => {
     e.preventDefault()
-    const followed = await followUser(target_id, user.id)
+    followUser(target_id, user.id)
   }
 
   const followUser = async (target_id, user_id) => {
@@ -36,29 +36,15 @@ export default function FollowButton(target) {
     {
       method: action,
     })
-    // const res = await fetch(`/api/follow`, {
-    //   method: action,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     user_id,
-    //     target_id,
-    //   }),
-    // });
-  }
-
-  const renderErrors = (errors) => {
-    if (errors) {
-      return errors.map(error => {
-        console.log(error)
-        return <div className='material-error'>{error}</div>
-      })
+    if(res.ok){
+      const followStatus = await res.json()
+      setText(followStatus)
     }
   }
 
   if (!user) return null;
+  if (target_id == user.id) return null;
   return (
-    <button onClick={onUpdate}>{text}</button>
+    <button className='followButton' onClick={onUpdate}>{text}</button>
   )
 }

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FollowButton from "../components/FollowButton"
+import '../styles/layout.css'
 
 function User() {
   const [user, setUser] = useState({});
-  // Notice we use useParams here instead of getting the params
-  // From props.
   const { userId }  = useParams();
 
   useEffect(() => {
@@ -25,18 +24,15 @@ function User() {
 
   return (
     <>
+      <h1>{user.username}</h1>
       <ul>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user.username}
-        </li>
         <li>
           <strong>Email</strong> {user.email}
         </li>
       </ul>
-      <FollowButton target_id={user.id} />
+      <div className='user-followButton'>
+        <FollowButton target_id={user.id} />
+      </div>
     </>
   );
 }

@@ -1,30 +1,32 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import UserContext from '../context/UserContext';
 import '../styles/layout.css'
 
-const VideoFeed = () => {
+const FollowedVideoFeed = () => {
   const { user } = useContext(UserContext)
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    async function fetchVideos(){
-      const res = await fetch(`/api/video/`)
-      if(res.ok){
+    async function fetchVideos() {
+      const res = await fetch(`/api/video/${user.id}/following`)
+      if (res.ok) {
         const resVids = await res.json()
-        console.log('fetched videos: ', resVids)
+        console.log('fetched followvideos: ', resVids)
         setVideos(resVids)
         return resVids
       }
     }
-    fetchVideos();
-  }, [])
+    if(user.id){
+      fetchVideos();
+    }
+  }, [user])
 
   const renderList = (list) => {
-    if(list){
+    if (list) {
       return list.map(item => {
         return (
-          <Link style={{ textDecoration: 'none'}} to={`/videos/${item.id}`} key={item.id} >
+          <Link style={{ textDecoration: 'none' }} to={`/videos/${item.id}`} key={item.id} >
             <div className='VideoFeed-member'>
               <h3>
                 {item.title}
@@ -48,7 +50,7 @@ const VideoFeed = () => {
 
   return (
     <>
-      <h1>Videos</h1>
+      <h1>Following</h1>
       <div>
         {renderList(videos)}
       </div>
@@ -56,4 +58,4 @@ const VideoFeed = () => {
   )
 }
 
-export default VideoFeed;
+export default FollowedVideoFeed;
