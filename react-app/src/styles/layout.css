@@ -81,6 +81,7 @@ nav ul{
   margin: 10px;
   padding: 10px;
   background-color: skyblue;
+  width: 60%;
 }
 .VideoFeed-member h3{
   margin: 0px;
@@ -205,7 +206,7 @@ nav ul{
   font-size: large;
 }
 .title{
-  position:fixed;
+  position:absolute;
   left: 10px;
   top: 10px;
   border: none;
