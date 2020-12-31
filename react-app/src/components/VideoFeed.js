@@ -25,7 +25,6 @@ const VideoFeed = () => {
   // }
 
   const renderList = (list) => {
-    console.log("list inside renderList: ",list)
     if(list){
       return list.map(item => {
         return (

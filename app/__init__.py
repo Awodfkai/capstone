@@ -6,7 +6,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
 from .models import db, User
-from .api import (user_routes, auth_routes, video_routes)
+from .api import (user_routes, auth_routes, video_routes, follow_routes)
 
 from .seeds import seed_commands
 
@@ -31,6 +31,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(video_routes, url_prefix='/api/video')
+app.register_blueprint(follow_routes, url_prefix='/api/follow')
 db.init_app(app)
 Migrate(app, db)
 

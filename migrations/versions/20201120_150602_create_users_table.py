@@ -55,7 +55,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.ForeignKeyConstraint(['follower_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['followed_id'], ['videos.id'], ),
+    sa.ForeignKeyConstraint(['followed_id'], ['users.id'], ),
     )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),

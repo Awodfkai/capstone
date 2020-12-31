@@ -60,3 +60,9 @@ def commentSchema(comment):
     'text': comment.text,
     'created_at': comment.created_at,
   }
+
+def followSchema(follow):
+  return {
+    'follower_id': follow.follower_id,
+    'followed_id': follow.followed_id,
+  }
