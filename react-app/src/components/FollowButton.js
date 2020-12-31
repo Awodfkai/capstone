@@ -43,7 +43,7 @@ export default function FollowButton(target) {
   }
 
   if (!user) return null;
-  if (target_id == user.id) return null;
+  if (target_id === user.id) return null;
   return (
     <button className='followButton' onClick={onUpdate}>{text}</button>
   )

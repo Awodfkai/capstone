@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom'
-import UserContext from '../context/UserContext';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 import '../styles/layout.css'
 
 const CommentFeed = () => {
-  const { user } = useContext(UserContext)
   const [comments, setComments] = useState([])
   const { vid } = useParams()
 
@@ -19,7 +17,7 @@ const CommentFeed = () => {
       }
     }
     fetchComments();
-  }, [])
+  }, [vid])
 
   const renderList = (list) => {
     if (list) {

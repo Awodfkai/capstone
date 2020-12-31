@@ -62,7 +62,7 @@ const Upload = () => {
     const url = newVideo
     console.log("url is what now?: ", url)
     if (url) {
-      const newData = await uploadVData(
+      await uploadVData(
         title,
         description,
         user_id,
@@ -76,6 +76,7 @@ const Upload = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    setFeedback('processing...')
     if(!file){
       setFeedback('no file selected')
     }
@@ -92,7 +93,6 @@ const Upload = () => {
       </div>
       <form onSubmit={onSubmit} className='upload-form'>
         <label>
-          Upload Your Video
           <br/>
           <input type="file" name="user_file" onChange={updateFile} />
         </label>

@@ -14,11 +14,15 @@ h1{
 h3{
   margin: 8px;
 }
+a{
+  color: black;
+  text-decoration: none;
+}
 a:visited {
   color: black;
 }
 a:hover {
-  color:forestgreen
+  color:darkgreen
 }
 nav{
   padding: 0px;
@@ -34,6 +38,7 @@ nav ul li{
 }
 nav ul li:hover{
   background-color: rgb(0, 30, 0);
+  color: white;
 }
 nav ul li:visited{
   background-color: red;
@@ -43,7 +48,6 @@ nav ul li a{
   color: white;
 }
 nav ul{
-  color: blue;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -81,9 +85,6 @@ nav ul{
 }
 .VideoFeed-member h3{
   margin: 0px;
-}
-VideoFeed-link{
-  text-decoration: none;
 }
 
 .VideoView{
@@ -159,9 +160,14 @@ VideoFeed-link{
   flex-direction: column;
   max-width: 500px;
   min-width: 200px;
+  align-items: flex-start;
+}
+.upload-form input{
+  min-width: 100%;
+  margin-bottom: 10px;
 }
 .upload-form button{
-  width: 200px;
+  width: 100px;
 }
 .upload-form label{
   padding: 5px;

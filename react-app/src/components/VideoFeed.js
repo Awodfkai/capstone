@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
-import UserContext from '../context/UserContext';
 import '../styles/layout.css'
 
 const VideoFeed = () => {
-  const { user } = useContext(UserContext)
   const [videos, setVideos] = useState([])
 
   useEffect(() => {

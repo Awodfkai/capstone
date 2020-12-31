@@ -35,7 +35,7 @@ function VideoView() {
       }
     }
     fetchVideo()
-  }, [])
+  }, [vid])
 
   const renderFollowButton = (vidOwnerId) => {
     if(vidOwnerId){

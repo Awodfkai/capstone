@@ -1,6 +1,4 @@
-import React, { useContext, useState } from 'react';
-import UserContext from '../context/UserContext';
-import User from './User';
+import React from 'react';
 import VideoFeed from '../components/VideoFeed';
 import FollowedVideoFeed from './FollowedVideoFeed';
 

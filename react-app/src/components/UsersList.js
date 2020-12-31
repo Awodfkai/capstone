@@ -23,7 +23,7 @@ function UsersList() {
 
   return (
     <>
-      <h1>Users </h1>
+      <h1>Users</h1>
       <ul className='userlist'>{userComponents}</ul>
     </>
   );
