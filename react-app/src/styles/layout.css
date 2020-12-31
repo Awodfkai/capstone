@@ -1,5 +1,5 @@
 body{
-  background-color: green;
+  background-color: forestgreen;
   min-width: 100%;
   margin: 0px;
   padding: 0px;
@@ -34,7 +34,7 @@ nav{
 nav ul li{
   display: inline;
   padding: 10px;
-  border-left: 1px solid brown;
+  border-left: 1px solid green;
 }
 nav ul li:hover{
   background-color: rgb(0, 30, 0);
