@@ -86,7 +86,7 @@ const Upload = () => {
   }
 
   return (
-    <>
+    <div className='upload'>
       <h1>Upload</h1>
       <div className='upload-response'>
         {renderResponse(feedback)}
@@ -106,7 +106,7 @@ const Upload = () => {
         </label>
         <button type="submit">Upload</button>
       </form>
-    </>
+    </div>
   )
 }
 

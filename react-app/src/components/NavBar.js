@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import tree from '../images/tree.png'
 import '../styles/layout.css'
 
 const NavBar = ({ authenticated, setAuthenticated }) => {
@@ -40,6 +41,19 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
   return (
     <nav>
       <ul>
+        <div className='title'>Treedeo</div>
+        <div style={{border:'none'}}>
+          <img src={tree} style={
+            {
+              height: '20px',
+              position: 'fixed',
+              left: '80px',
+              top: '10px'
+            }
+          }>
+
+          </img>
+        </div>
         <li>
           <NavLink to="/" exact={true} activeClassName="active">
             Home

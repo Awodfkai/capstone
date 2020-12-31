@@ -79,6 +79,12 @@ def getFollowedVideos(uid):
   videos_list = [videoSchema(video) for video in videos]
   return jsonify(videos_list)
 
+@video_routes.route('/user/<int:uid>', methods=['GET'])
+def getUserVideos(uid):
+  videos = Video.query.filter_by(user_id=uid).order_by(Video.created_at).all()
+  videos_list = [videoSchema(video) for video in videos]
+  return jsonify(videos_list)
+
 @video_routes.route('/<int:vid>', methods=['GET'])
 def getVideo(vid):
   print('inside get by id video route............')
