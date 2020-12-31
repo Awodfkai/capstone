@@ -46,7 +46,7 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
           <img src={tree} style={
             {
               height: '20px',
-              position: 'fixed',
+              position: 'absolute',
               left: '80px',
               top: '10px'
             }
