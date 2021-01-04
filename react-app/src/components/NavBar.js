@@ -37,6 +37,7 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
       )
     }
   }
+  
 
   return (
     <nav>
